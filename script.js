@@ -136,10 +136,11 @@ function editModal(gameId) {
 				year: selectedGame.year,
 				imageUrl: selectedGame.imageUrl,
 			})
-		})
-		document
+			document
 			.querySelector('button[type="submit"]')
 			.addEventListener("click", () => updateGames(title, year, imageUrl))
+		})
+		
 	})
 }
 function modifyFom(gameData) {
