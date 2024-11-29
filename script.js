@@ -103,9 +103,17 @@ viewButtons.forEach((btn) => {
 
 
 function modifyModal(modalTitle, modalBody) {
-	// Écrir le nom du jeu dans le titre du modal
+	// Écrire le nom du jeu dans le titre du modal
 	document.querySelector(".modal-title").textContent = modalTitle
+	// Écrire dans le corps du modal
 	document.querySelector(".modal-body").innerHTML = modalBody
+	// Écrire dans le footer
+	document.querySelector(".modal-footer").innerHTML = `
+		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+			Close
+		</button>
+		<button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Submit</button>
+</form>`
 }
 function viewModal(gameId) {
 	// console.log(gameId, gamesList)
@@ -129,12 +137,17 @@ function editModal(gameId) {
 				imageUrl: selectedGame.imageUrl,
 			})
 		})
+		document
+			.querySelector('button[type="submit"]')
+			.addEventListener("click", () => updateGames(title, year, imageUrl))
 	})
 }
-
 function modifyFom(gameData) {
 	const form = document.querySelector("form")
 	form.title.value = gameData.title
 	form.year.value = gameData.year
 	form.imageUrl.value = gameData.imageUrl
+}
+function updateGames(title, year, imageUrl, gameId) {
+	console.log(title, year, imageUrl, gameId)
 }
