@@ -1,9 +1,9 @@
 const gamesList = [
 	{
-		title: "Tekken",
-		year: 1994,
+		title: "The legend of Zelda :breath of the wild",
+		year: 2017,
 		imageUrl:
-			"https://cdn.dashfight.com/bcf6a9046a9ea4c1070d4aedb2981103c978a704.png",
+			"https://nintendosoup.com/wp-content/uploads/2019/12/legend-of-zelda-breath-of-the-wild-ending-alt-fanart-dec242019.jpeg",
 		id: 1,
 	},
 	{
@@ -21,10 +21,10 @@ const gamesList = [
 		id: 3,
 	},
 	{
-		title: "Street Fighter V",
-		year: 2015,
+		title: "Smash Bros : Ultimate",
+		year: 2018,
 		imageUrl:
-			"https://gaming-cdn.com/images/products/671/orig/street-fighter-v-pc-jeu-steam-cover.jpg?v=1662539255",
+			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa2NVwYCKhKulACuydnKWFWsac4pNPdj9lsQ&s",
 		id: 4,
 	},
 	{
