@@ -41,17 +41,17 @@ const gamesList = [
 			"https://gaming-cdn.com/images/products/146/orig/the-elder-scrolls-v-skyrim-pc-jeu-steam-europe-cover.jpg?v=1661270991",
 		id: 6,
 	},
-]
+];
 
 function writeDom() {
 	gamesList.forEach((game) => {
-		const articleContainer = document.querySelector(".row")
+		const articleContainer = document.querySelector(".row");
 		articleContainer.innerHTML += `<article class="col">
 							<div class="card shadow-sm">
 								<img src="${game.imageUrl}" alt="${game.title}" class="card-img-top" />
 
 								<div class="card-body">
-								<h3 class="card-title">${game.title}</h3>
+									<h3 class="card-title">${game.title}</h3>
 									<p class="card-text">
 										${game.year}
 									</p>
@@ -63,7 +63,7 @@ function writeDom() {
 												type="button"
 												class="btn btn-sm btn-outline-secondary view"
 												data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                data-view-id="${game.id}"
+												data-view-id="${game.id}"
 											>
 												View
 											</button>
@@ -71,7 +71,7 @@ function writeDom() {
 												type="button"
 												class="btn btn-sm btn-outline-secondary edit"
 												data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                data-edit-id="${game.id}"
+												data-edit-id="${game.id}"
 											>
 												Edit
 											</button>
@@ -79,57 +79,34 @@ function writeDom() {
 									</div>
 								</div>
 							</div>
-						</article>`
-	})
+						</article>`;
+	});
 }
-writeDom()
 
-//const editButtons = document.querySelectorAll(".edit")
-//console.log(editButtons)
+writeDom();
 
-/*const editButtons = document.querySelectorAll(".edit")
-editButtons.forEach((btn) => {
-	btn.addEventListener("click", () => {
-		console.log("hello edit !!!")
-	})
-})*/
-
-/*const editButtons = document.querySelectorAll(".edit")
+// Gestion des boutons Edit
+const editButtons = document.querySelectorAll(".edit");
 editButtons.forEach((btn) => {
 	btn.addEventListener("click", (e) => {
-		console.log(e.target.getAttribute("data-edit-id"))
-	})
-})*/
+		editModal(e.target.getAttribute("data-edit-id"));
+	});
+});
 
-const editButtons = document.querySelectorAll(".edit")
-editButtons.forEach((btn) => {
+// Gestion des boutons View
+const viewButtons = document.querySelectorAll(".view");
+viewButtons.forEach((btn) => {
 	btn.addEventListener("click", (e) => {
-		editModal(e.target.getAttribute("data-edit-id"))
-	})
-})
+		viewModal(e.target.getAttribute("data-view-id"));
+	});
+});
 
-/*function editModal(gameId) {
-	// console.log(gameId, gamesList)
-	// Trouvez le jeu en fonction de son identifiant
-	const result = gamesList.findIndex((game) => game.id === parseInt(gameId))
-	// passer une image comme corps du modal
-	const modalBody = `<h4>ajoutez un formulaire pour modifier le jeu ici</h4>`
-	modifyModal("Mode Edition", modalBody)
-}*/
 
 function modifyModal(modalTitle, modalBody) {
 	// Écrir le nom du jeu dans le titre du modal
 	document.querySelector(".modal-title").textContent = modalTitle
 	document.querySelector(".modal-body").innerHTML = modalBody
 }
-
-const viewButtons = document.querySelectorAll(".view")
-viewButtons.forEach((btn) => {
-	btn.addEventListener("click", (e) => {
-		viewModal(e.target.getAttribute("data-view-id"))
-	})
-})
-
 function viewModal(gameId) {
 	// console.log(gameId, gamesList)
 	// Trouvez le jeu en fonction de son identifiant
@@ -137,19 +114,11 @@ function viewModal(gameId) {
 	const modalBody = `<img src="${gamesList[result].imageUrl}" alt="${gamesList[result].title}" class="img-fluid" />`
 	modifyModal(gamesList[result].title, modalBody)
 }
-
-/*function editModal(gameId) {
-	// console.log(gameId, gamesList)
-	// Trouvez le jeu en fonction de son identifiant
-	const result = gamesList.findIndex((game) => game.id === parseInt(gameId))
-	modifyModal("Mode Edition")
-}*/
-
 function editModal(gameId) {
 	// Trouvez le jeu en fonction de son identifiant
 	const result = gamesList.findIndex((game) => game.id === parseInt(gameId))
 	// Injectez le formulaire dans le corps du modal
-	fetch("from.html").then((data) => {
+	fetch("./form.html").then((data) => {
 		data.text().then((form) => {
 			// Modifiez le titre et le corps du modal
 			const selectedGame = gamesList[result]
@@ -162,8 +131,6 @@ function editModal(gameId) {
 		})
 	})
 }
-
-
 
 function modifyFom(gameData) {
 	const form = document.querySelector("form")
