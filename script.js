@@ -86,7 +86,7 @@ function writeDom() {
 writeDom();
 
 // Gestion des boutons Edit
-const editButtons = document.querySelectorAll(".edit");
+let editButtons = document.querySelectorAll(".edit");
 editButtons.forEach((btn) => {
 	btn.addEventListener("click", (e) => {
 		editModal(e.target.getAttribute("data-edit-id"));
@@ -94,7 +94,7 @@ editButtons.forEach((btn) => {
 });
 
 // Gestion des boutons View
-const viewButtons = document.querySelectorAll(".view");
+let viewButtons = document.querySelectorAll(".view");
 viewButtons.forEach((btn) => {
 	btn.addEventListener("click", (e) => {
 		viewModal(e.target.getAttribute("data-view-id"));
@@ -119,8 +119,16 @@ function viewModal(gameId) {
 	// console.log(gameId, gamesList)
 	// Trouvez le jeu en fonction de son identifiant
 	const result = gamesList.findIndex((game) => game.id === parseInt(gameId))
+	// passer une image comme corps du modal
 	const modalBody = `<img src="${gamesList[result].imageUrl}" alt="${gamesList[result].title}" class="img-fluid" />`
 	modifyModal(gamesList[result].title, modalBody)
+	// edit footer
+	// Écrire dans le footer
+	document.querySelector(".modal-footer").innerHTML = `
+		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+			Close
+		</button>
+</form>`
 }
 function editModal(gameId) {
 	// Trouvez le jeu en fonction de son identifiant
@@ -138,7 +146,7 @@ function editModal(gameId) {
 			})
 			document
 			.querySelector('button[type="submit"]')
-			.addEventListener("click", () => updateGames(title, year, imageUrl))
+			.addEventListener("click", () => updateGames(title.value, year.value, imageUrl.value, gameId))
 		})
 		
 	})
@@ -150,6 +158,8 @@ function modifyFom(gameData) {
 	form.imageUrl.value = gameData.imageUrl
 }
 function updateGames(title, year, imageUrl, gameId) {
+	console.log(gameId);
+	
 	// Trouvez le jeu en fonction de son identifiant
 	const index = gamesList.findIndex((game) => game.id === parseInt(gameId))
 
